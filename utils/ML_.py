@@ -31,6 +31,15 @@ def Algo_KMeans(data, n_clusters, *args, **kwargs):
     model  = kmeans.fit(data)
     return model
 
+def cluster_number_KMeans(X, max_cluster, *args, **kwargs):
+   
+    sum_of_squared_distances = []
+    K = range(1, max_cluster)
+    for n_cluster in K:
+        km = Algo_KMeans(X, n_cluster, *args, **kwargs)
+        sum_of_squared_distances.append(km.inertia_)
+    return sum_of_squared_distances, K
+        
 def Algo_DBScan(data, epsilon, min_samples, *args, **kwargs):
     
     dbscan = DBSCAN(eps=epsilon, min_samples=min_samples, n_jobs=-1, *args, **kwargs)
